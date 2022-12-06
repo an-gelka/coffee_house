@@ -18,7 +18,10 @@ function totalSumm() {
         sum +=
             parseInt(checkboxElement.dataset.price) * parseInt(amountElement.value);
         } else {
+        
+        alert("Ошибка! указано неверное количество");
         amountElement.value = 0;
+        break;
         }
         resultElement.textContent = sum;
     }
