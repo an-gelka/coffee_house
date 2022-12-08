@@ -10,26 +10,54 @@ function totalSumm() {
     sum = 0;
     for (const product of products) {
         let checkboxElement = product.querySelector('input[type="checkbox"]');
-        let amountElement = product.querySelector('input[type="number"]');
-        if (checkboxElement.checked) {
-        if (amountElement.value <= 0 || amountElement.value > 100) {
-            amountElement.value = 1;
-        }
-        sum +=
-            parseInt(checkboxElement.dataset.price) * parseInt(amountElement.value);
+        let amountElement = product.querySelector('input[type="number"]');        
+            if (checkboxElement.checked) {
+                if (amountElement.value <= 0 || amountElement.value > 100) {
+                amountElement.value = 1;
+                }
+            sum += parseInt(checkboxElement.dataset.price) * parseInt(amountElement.value);        
+            }        
+            else {       
+            amountElement.value = 0;        
+            }  
+        resultElement.textContent = sum; }    
+    }    
+    btnElement.addEventListener("click" , function(){        
+        orderList = [];
+        for (const product of products) {
+            let choiceElement = product.querySelector('[name="menu"]');
+            let amount = product.querySelector('[name="quantity"]');
+            if (choiceElement.checked) {
+            firstSum = parseInt(choiceElement.dataset.price) * parseInt(amount.value);
+            foodName = choiceElement.dataset.goods;
+            position = `${foodName} - ${amount.value} шт. = ${firstSum} р.`;
+            orderList.push(position);
+            }
+        }          
+        if (orderList == "") {
+            alert("Товар не выбран!");
         } else {
-        
-        alert("Ошибка! указано неверное количество");
-        amountElement.value = 0;
-        break;
+            alert (
+            `Заказчик: ${inputSurname.value} ${inputName.value}\n\nВаш заказ:\n${orderList.join("\n")}\n\nИтого: ${resultElement.textContent} руб.`
+            );
         }
-        resultElement.textContent = sum;
-    }
-    }
-btnElement.addEventListener("click" , function(){
-    alert(`Заказчик: ${inputSurname.value} ${inputName.value}
-Итого: ${resultElement.textContent} р.`)
-})
+        })
+
+
+
+
+
+
+
+
+
+    
+    
+ 
+
+
+ 
+    
 
 
 
